@@ -1,12 +1,14 @@
-package com.fiap.springblog.Controller;
+package com.fiap.springblog.controller;
 
 import com.fiap.springblog.model.Artigo;
 import com.fiap.springblog.service.ArtigoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -45,8 +47,27 @@ public class ArtigoController {
     }
 
     @PutMapping
-    public void atualizar(Artigo updateArtigo) {
+    public void atualizar(@RequestBody Artigo updateArtigo) {
         this.artigoService.atualizar(updateArtigo);
+    }
+
+    @PutMapping("/{id}")
+    public void atualizarArtigo(
+            @PathVariable String id,
+            @RequestBody String novaURL) {
+       this.artigoService.atualizarArtigo(id,novaURL);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deletaArtigo(
+            @PathVariable String id){
+        this.artigoService.deleteById(id);
+    }
+
+    @DeleteMapping("/delete")
+    public void deleteArtigoById(
+          @RequestParam("Id") String id) {
+        this.artigoService.deleteArtigoById(id);
     }
 
 }

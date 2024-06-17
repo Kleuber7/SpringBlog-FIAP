@@ -1,8 +1,8 @@
-package com.fiap.springblog.Service.ServiceImpl;
+package com.fiap.springblog.service.Impl;
 
-import com.fiap.springblog.Model.Autor;
-import com.fiap.springblog.Repository.AutorRepository;
-import com.fiap.springblog.Service.AutorService;
+import com.fiap.springblog.model.Autor;
+import com.fiap.springblog.repository.AutorRepository;
+import com.fiap.springblog.service.AutorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

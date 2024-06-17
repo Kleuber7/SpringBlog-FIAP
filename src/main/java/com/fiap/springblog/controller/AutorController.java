@@ -1,4 +1,4 @@
-package com.fiap.springblog.Controller;
+package com.fiap.springblog.controller;
 
 import com.fiap.springblog.model.Autor;
 import com.fiap.springblog.service.AutorService;
@@ -14,11 +14,13 @@ public class AutorController {
 
     @PostMapping
     public Autor criar(@RequestBody Autor autor) {
+
         return this.autorService.criar(autor);
     }
 
     @GetMapping("/{codigo}")
     public Autor obterPorCodigo(@PathVariable String codigo) {
+
         return this.autorService.obterPorCodigo(codigo);
     }
 }
