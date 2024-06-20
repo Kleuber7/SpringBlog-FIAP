@@ -1,6 +1,9 @@
 package com.fiap.springblog.service;
 
 import com.fiap.springblog.model.Artigo;
+import com.fiap.springblog.model.ArtigoStatusCount;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,4 +19,17 @@ public interface ArtigoService {
     public void atualizarArtigo(String id, String novaURL);
     public void deleteById(String id);
     public void deleteArtigoById(String id);
+    public List<Artigo> findByStatusAndDataGreaterThan(Integer status, LocalDateTime data);
+    public List<Artigo> obterArtigoPorDataHora(LocalDateTime de, LocalDateTime ate);
+    public List<Artigo> encontrarArtigosComplexos(Integer status,
+                                                  LocalDateTime data,
+                                                  String titulo);
+    Page<Artigo> findAll(Pageable pageable);
+    public List<Artigo> findByStatusOrderByTituloAsc(Integer status);
+    public List<Artigo> obterArtigoPorStatusComOrdenacao(Integer status);
+
+    public List<Artigo> findByTexto(String searchTerm);
+
+
+    public List<ArtigoStatusCount> contarArtigoPorStatus();
 }
