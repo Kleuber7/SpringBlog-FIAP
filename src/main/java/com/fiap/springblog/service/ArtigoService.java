@@ -2,6 +2,7 @@ package com.fiap.springblog.service;
 
 import com.fiap.springblog.model.Artigo;
 import com.fiap.springblog.model.ArtigoStatusCount;
+import com.fiap.springblog.model.Autor;
 import com.fiap.springblog.model.AutorTotalArtigo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +17,9 @@ public interface ArtigoService {
     public List<Artigo> obterTodos();
     public Artigo obterPorCodigo(String codigo);
     /*public Artigo criar(Artigo artigo);*/
+
+    public ResponseEntity<?> criarArtigoComAutor(Artigo artigo, Autor autor);
+    public void excluirArtigoeAutor(Artigo artigo);
 
     public ResponseEntity<?> criar (Artigo artigo);
     public ResponseEntity<?> atualizarArtigo(String id, Artigo artigo);

@@ -1,13 +1,13 @@
 package com.fiap.springblog.controller;
 
-import com.fiap.springblog.model.Artigo;
-import com.fiap.springblog.model.ArtigoStatusCount;
-import com.fiap.springblog.model.AutorTotalArtigo;
+import com.fiap.springblog.model.*;
 import com.fiap.springblog.service.ArtigoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.support.TransactionTemplate;
 import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -35,6 +35,21 @@ public class ArtigoController {
         return this.artigoService.criar(artigo);
     }*/
 
+    //Ambiente Clusterizado
+    @PostMapping
+    public ResponseEntity<?> criarArtigoComAutor(@RequestBody ArtigoComAutorRequest request){
+
+        Artigo artigo = request.getArtigo();
+        Autor autor = request.getAutor();
+
+        return this.artigoService.criarArtigoComAutor(artigo,autor);
+    }
+
+    @DeleteMapping("/delete-artigo-autor")
+    public void excluirArtigoeAutor(@RequestBody Artigo artigo) {
+         this.artigoService.excluirArtigoeAutor(artigo);
+    }
+
     @PostMapping
     public ResponseEntity<?> criar(@RequestBody Artigo artigo) {
         return this.artigoService.criar(artigo);
@@ -43,7 +58,7 @@ public class ArtigoController {
     @PutMapping("/atualizar-artigo/{id}")
     public ResponseEntity<?> atualizarArtigo(
             @PathVariable("id") String id,
-            @RequestBody Artigo artigo) {
+            @Valid @RequestBody Artigo artigo) {
         return this.artigoService.atualizarArtigo(id, artigo);
     }
 
